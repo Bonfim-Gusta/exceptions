@@ -15,7 +15,7 @@ public class Main {
         int number = scanner.nextInt();
         System.out.print("Check-in date (DD/MM/YYYY): ");
         LocalDate checkIn = LocalDate.parse(scanner.next(), fmt);
-        System.out.print("Check-in date (DD/MM/YYYY): ");
+        System.out.print("Check-out date (DD/MM/YYYY): ");
         LocalDate checkOut = LocalDate.parse(scanner.next(), fmt);
 
         if (!checkOut.isAfter(checkIn)){
@@ -28,21 +28,16 @@ public class Main {
             System.out.println("\n Enter data to update the reservation:");
             System.out.print("Check-in date (DD/MM/YYYY): ");
             checkIn = LocalDate.parse(scanner.next(), fmt);
-            System.out.print("Check-in date (DD/MM/YYYY): ");
+            System.out.print("Check-out date (DD/MM/YYYY): ");
             checkOut = LocalDate.parse(scanner.next(), fmt);
 
-            LocalDate now = LocalDate.now();
-            if (checkIn.isBefore(now) || checkOut.isBefore(now)){
-                System.out.println("Error in reservation: Reservatio dates...");
-            }
-            else if (!checkOut.isAfter(checkIn)){
-                System.out.println("Error in reservation: Reservatio dates...");
+            String error = reservation.updateDates(checkIn, checkOut);
+            if (error != null){
+                System.out.println("Error in reseervation: " + error);
             }
             else {
-                reservation.updateDates(checkIn, checkOut);
                 System.out.println("Reservation: " + reservation);
             }
-
         }
 
 
